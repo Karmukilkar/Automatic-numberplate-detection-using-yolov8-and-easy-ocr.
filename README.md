@@ -83,9 +83,10 @@ model = YOLO("yolov8s.pt")
 
 model.train(
     data="/content/drive/MyDrive/Final_project/dataset/data.yaml",
-    epochs=60,
-    imgsz=1080,
+    epochs=50,
+    imgsz=920,
     batch=16,
+    lr0=0.001,
     name="plate_detector"
 )
 ```
