@@ -99,10 +99,10 @@ The trained model is saved at:
 ### 🧮 Model Metrics
 | Metric | Value |
 |--------|--------|
-| Precision | 0.875 |
-| Recall | 0.696 |
-| mAP@50 | 0.758 |
-| mAP@50-95 | 0.446 |
+| Precision | 0.8652 |
+| Recall | 0.818 |
+| mAP@50 | 0.829 |
+| mAP@50-95 | 0.505 |
 
 ---
 
