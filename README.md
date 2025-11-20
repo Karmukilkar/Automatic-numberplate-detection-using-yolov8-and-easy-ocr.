@@ -78,7 +78,6 @@ The model was trained using **YOLOv8s** for number plate detection.
 
 ```python
 from ultralytics import YOLO
-
 model = YOLO("yolov8s.pt")
 
 model.train(
@@ -87,8 +86,14 @@ model.train(
     imgsz=920,
     batch=16,
     lr0=0.001,
-    name="plate_detector"
+    name="plate_detector",
+    degrees=15.0,
+    shear=1.0,
+    perspective=0.0005
+
+
 )
+
 ```
 
 The trained model is saved at:
@@ -99,10 +104,10 @@ The trained model is saved at:
 ### 🧮 Model Metrics
 | Metric | Value |
 |--------|--------|
-| Precision | 0.8652 |
-| Recall | 0.818 |
-| mAP@50 | 0.829 |
-| mAP@50-95 | 0.505 |
+| Precision | 0.7101 |
+| Recall    | 0.8261 |
+| mAP@50    | 0.8700 |
+| mAP@50-95 | 0.4650 |
 
 ---
 
@@ -116,9 +121,15 @@ The **EasyOCR** library is used to extract alphanumeric text from detected plate
 - Contrast enhancement  
 
 ```python
-gray = cv2.cvtColor(crop, cv2.COLOR_RGB2GRAY)
-_, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-ocr_result = reader.readtext(binary)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    clahe_img = clahe.apply(gray)
+
+    median_blur_img = cv2.medianBlur(clahe_img, 5)
+
+    binary_img = cv2.adaptiveThreshold(median_blur_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                       cv2.THRESH_BINARY, 11, 2)
 ```
 
 This improves OCR accuracy and reduces noise for clearer text extraction.
