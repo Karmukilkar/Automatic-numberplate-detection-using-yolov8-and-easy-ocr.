@@ -24,7 +24,7 @@ The main objective of this project is to:
 This ANPR system combines **object detection** and **optical character recognition (OCR)** into a unified pipeline:
 
 1. **Detection:** YOLOv8 model detects and localizes number plates in input images.  
-2. **Preprocessing:** Detected plate regions are cropped, converted to grayscale, and binarized to enhance text visibility.  
+2. **Preprocessing:** Detected plate regions are cropped, converted to grayscale, and  Adaptive thresholding  to enhance text visibility.  
 3. **Recognition:** EasyOCR extracts the alphanumeric text from the processed plate.  
 4. **Display:** Detected and recognized results are displayed in a user-friendly Streamlit web app.
 
@@ -119,7 +119,7 @@ The **EasyOCR** library is used to extract alphanumeric text from detected plate
 - Grayscale conversion  
 - Applying clahe to increase the contrast of the image  
 - Median blur to handle the noise in the image
-- binarization to convert the image into black and white 
+- Adaptive thresholding to convert the image into black and white 
 
 ```python
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
