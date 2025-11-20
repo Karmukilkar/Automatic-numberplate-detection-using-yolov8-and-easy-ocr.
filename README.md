@@ -117,8 +117,9 @@ The **EasyOCR** library is used to extract alphanumeric text from detected plate
 
 ### Preprocessing Techniques:
 - Grayscale conversion  
-- Otsu thresholding (binarization)  
-- Contrast enhancement  
+- Applying clahe to increase the contrast of the image  
+- Median blur to handle the noise in the image
+- binarization to convert the image into black and white 
 
 ```python
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
